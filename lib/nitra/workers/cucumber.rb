@@ -10,7 +10,8 @@ module Nitra::Workers
 
     def load_environment
       require 'cucumber'
-      require 'pry'
+      puts 'PRY'
+      puts require 'pry'
       require 'nitra/ext/cucumber'
     end
 
