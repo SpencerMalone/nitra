@@ -44,7 +44,7 @@ module Nitra::Workers
         puts 'Failures?'
         puts cuke_runtime.results.instance_variables
         puts cuke_runtime.results.inspect
-        puts cuke_runtime.send(:summary_report)
+        puts cuke_runtime.send(:summary_report).inspect
         puts @configuration.exceptions_to_retry;
         puts @attempt
         puts @configuration.max_attempts
