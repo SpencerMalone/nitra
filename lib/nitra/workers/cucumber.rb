@@ -45,7 +45,6 @@ module Nitra::Workers
         puts @configuration.exceptions_to_retry;
         puts @attempt
         puts @configuration.max_attempts
-        puts cuke_runtime.args
         puts cuke_runtime.scenarios
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts &&
            cuke_runtime.scenarios(:failed).any? {|scenario| puts "Failure!"; puts scenario.exception.to_s; puts scenario.exception.to_s =~ @configuration.exceptions_to_retry; scenario.exception.to_s =~ @configuration.exceptions_to_retry}
