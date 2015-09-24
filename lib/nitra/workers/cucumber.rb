@@ -41,20 +41,10 @@ module Nitra::Workers
         }
       else
         run_with_arguments("--no-color", "--require", "features", filename)
-        puts 'Failures?'
-        puts cuke_runtime.results.instance_variables
-        puts cuke_runtime.results.inspect
-        puts cuke_runtime.send(:summary_report).test_cases.inspect
-        puts @configuration.exceptions_to_retry;
+        puts cuke_runtime.failure?
         puts @attempt
-        puts @configuration.max_attempts
-        puts cuke_runtime.scenarios.inspect
-        if(cuke_runtime.failure?)
-          puts 'pry!'
-
-        end
-        if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts &&
-           cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
+        puts cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
+        if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
           raise RetryException
         end
 
