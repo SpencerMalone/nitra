@@ -49,8 +49,7 @@ module Nitra::Workers
         puts cuke_runtime.scenarios
         if(cuke_runtime.failure?)
           puts 'pry!'
-          puts require('pry')
-          binding.pry
+
         end
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts &&
            cuke_runtime.scenarios(:failed).any? {|scenario| puts "Failure!"; puts scenario.exception.to_s; puts scenario.exception.to_s =~ @configuration.exceptions_to_retry; scenario.exception.to_s =~ @configuration.exceptions_to_retry}
