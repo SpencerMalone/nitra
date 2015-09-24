@@ -27,6 +27,14 @@ module Cucumber
         @loader = nil
       end
     end
+    
+    def results
+      if defined?(super)
+        super
+      else
+        results
+      end
+    end  
 
     def failure?
       if defined?(super)
