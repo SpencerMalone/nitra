@@ -54,7 +54,7 @@ module Nitra::Workers
 
         end
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts &&
-           cuke_runtime.send(:summary_report).exceptions[0].to_s =~ @configuration.exceptions_to_retry}
+           cuke_runtime.send(:summary_report).exceptions[0].to_s =~ @configuration.exceptions_to_retry
           raise RetryException
         end
 
