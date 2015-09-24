@@ -41,7 +41,11 @@ module Nitra::Workers
       else
         run_with_arguments("--no-color", "--require", "features", filename)
         puts 'Failures?'
-        puts cuke_runtime.inspect;
+        puts cuke_runtime.failure;
+        puts @configuration.exceptions_to_retry;
+        puts @attempt
+        puts @configuration.max_attempts
+        puts cuke_runtime.results.scenarios(:failed)
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts &&
            cuke_runtime.results.scenarios(:failed).any? {|scenario| puts "Failure!"; puts scenario.exception.to_s; puts scenario.exception.to_s =~ @configuration.exceptions_to_retry; scenario.exception.to_s =~ @configuration.exceptions_to_retry}
           raise RetryException
