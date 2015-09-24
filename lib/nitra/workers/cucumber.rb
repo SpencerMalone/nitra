@@ -42,7 +42,9 @@ module Nitra::Workers
       else
         run_with_arguments("--no-color", "--require", "features", filename)
         puts 'Failures?'
-        puts cuke_runtime.failure?;
+        puts cuke_runtime.results.instance_variables
+        puts cuke_runtime.results.inspect
+        puts cuke_runtime.results.send(:summary_report)
         puts @configuration.exceptions_to_retry;
         puts @attempt
         puts @configuration.max_attempts
