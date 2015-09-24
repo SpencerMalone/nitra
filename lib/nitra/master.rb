@@ -42,7 +42,8 @@ class Nitra::Master
 
     formatter.finish
     burndown.finish configuration.burndown_report if configuration.burndown_report
-
+    require('pry')
+    binding.pry
     !$aborted && progress.files_completed == progress.file_count && progress.failure_count.zero? && !progress.failure
   end
 
