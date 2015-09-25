@@ -69,7 +69,7 @@ module Nitra::Workers
 
     def clean_up
       super
-
+      puts "test env number: " + ENV['TEST_ENV_NUMBER']
       cuke_runtime.reset
     end
 
