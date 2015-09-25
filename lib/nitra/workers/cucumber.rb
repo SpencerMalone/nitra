@@ -45,6 +45,10 @@ module Nitra::Workers
         puts @attempt
         puts cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
+            puts "test env number: " + ENV['TEST_ENV_NUMBER']
+
+              ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i + 1) % configuration.process_count).to_s
+            puts "new test env number: " + ENV['TEST_ENV_NUMBER']
           raise RetryException
         end
 
@@ -68,10 +72,6 @@ module Nitra::Workers
     end
 
     def clean_up
-            puts "test env number: " + ENV['TEST_ENV_NUMBER']
-
-      ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i + 1) % configuration.process_count).to_s
-            puts "new test env number: " + ENV['TEST_ENV_NUMBER']
 
       super
 
