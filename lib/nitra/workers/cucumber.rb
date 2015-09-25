@@ -68,8 +68,13 @@ module Nitra::Workers
     end
 
     def clean_up
+            puts "test env number: " + ENV['TEST_ENV_NUMBER']
+
+      ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i + 1) % configuration.process_count).to_s
+            puts "new test env number: " + ENV['TEST_ENV_NUMBER']
+
       super
-      puts "test env number: " + ENV['TEST_ENV_NUMBER']
+
       cuke_runtime.reset
     end
 
