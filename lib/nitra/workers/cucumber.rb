@@ -40,9 +40,16 @@ module Nitra::Workers
           "parts_to_run"  => scenarios,
         }
       else
+        begin
         run_with_arguments("--no-color", "--require", "features", filename)
+        rescue => e
+          puts "Cucumber error'd! Re-running."
+          puts e
+          puts e.backtrace
+          run_file(filename,preloading)
+        end
         puts cuke_runtime.failure?
-        puts @attempt
+        puts "Attempt number: " + @attempt
         puts cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
             puts "test env number: " + ENV['TEST_ENV_NUMBER']
