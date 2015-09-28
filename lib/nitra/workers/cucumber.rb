@@ -49,7 +49,7 @@ module Nitra::Workers
           run_file(filename,preloading)
         end
         puts cuke_runtime.failure?
-        puts "Attempt number: " + @attempt
+        puts "Attempt number: " + @attempt.to_s
         puts cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
             puts "test env number: " + ENV['TEST_ENV_NUMBER']
