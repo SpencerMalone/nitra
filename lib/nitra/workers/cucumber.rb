@@ -53,7 +53,8 @@ module Nitra::Workers
           run_with_arguments("--no-color", "--require", "features", filename)
         else
           run_with_arguments("--no-color", "--require", "features", filename, "-p", configuration.cuke_profile)
-        end        rescue => e
+        end
+        rescue => e
           puts "Cucumber error'd! Re-running."
           puts e
           puts e.backtrace
