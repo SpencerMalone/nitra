@@ -41,7 +41,9 @@ module Nitra::Workers
         }
       else
         begin
+        ENV['BROWSERLESS'] = 'true'
         run_with_arguments("--no-color", "--require", "features", filename)
+        ENV['BROWSERLESS'] = nil;
         rescue => e
           puts "Cucumber error'd! Re-running."
           puts e
