@@ -31,7 +31,11 @@ module Nitra::Workers
     def run_file(filename, preloading = false)
       if configuration.split_files && !preloading && !filename.include?(':')
         ENV['BROWSERLESS'] = 'true'
-        run_with_arguments("--no-color", "--require", "features", "--dry-run", filename)
+        if(configuration.cuke_profile.nil?)
+          run_with_arguments("--no-color", "--require", "features", "--dry-run", filename)
+        else
+          run_with_arguments("--no-color", "--require", "features", "--dry-run", filename, "-p", configuration.cuke_profile)
+        end
         ENV['BROWSERLESS'] = nil
 
         scenarios = cuke_runtime.scenarios.collect {|scenario| "#{scenario.location.file}:#{scenario.location.line}"}
@@ -44,8 +48,12 @@ module Nitra::Workers
         }
       else
         begin
-        run_with_arguments("--no-color", "--require", "features", filename)
-        rescue => e
+        
+        if(configuration.cuke_profile.nil?)
+          run_with_arguments("--no-color", "--require", "features", filename)
+        else
+          run_with_arguments("--no-color", "--require", "features", filename, "-p", configuration.cuke_profile)
+        end        rescue => e
           puts "Cucumber error'd! Re-running."
           puts e
           puts e.backtrace
