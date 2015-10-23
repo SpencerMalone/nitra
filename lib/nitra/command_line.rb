@@ -93,6 +93,10 @@ module Nitra
         opts.on("--attempts N", Integer, "Maximum number of times to try tests that fail with the --retry exceptions") do |max_attempts|
           configuration.max_attempts = max_attempts
         end
+        
+        opts.on('--cukeprofile PROFILE', String, "Cucumber profile to load") do |profile|
+          configuration.choose_cuke_profile(profile)
+      end
 
         opts.on_tail("-h", "--help", "Show this message") do
           puts opts
