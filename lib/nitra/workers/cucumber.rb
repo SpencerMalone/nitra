@@ -50,9 +50,9 @@ module Nitra::Workers
         begin
         
         if(configuration.cuke_profile.nil?)
-          run_with_arguments("--no-color", "--require", "features", filename)
+          run_with_arguments("--no-color", "--require", "features", filename, "-p", "browserless")
         else
-          run_with_arguments("--no-color", "--require", "features", filename, "-p", configuration.cuke_profile)
+          run_with_arguments("--no-color", "--require", "features", filename, "-p", "browserless")
         end
         rescue => e
           puts "Cucumber error'd! Re-running."
