@@ -70,7 +70,7 @@ module Nitra::Workers
                 ENV['SCREENS'] = "true"
                 $take_screens = "true"
               end  
-              ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i % configuration.process_count) + 1).to_s
+              #ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i % configuration.process_count) + 1).to_s
             puts "new test env number: " + ENV['TEST_ENV_NUMBER']
           raise RetryException
         end
