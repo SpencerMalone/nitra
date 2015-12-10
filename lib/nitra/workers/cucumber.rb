@@ -65,6 +65,9 @@ module Nitra::Workers
         puts cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
         if cuke_runtime.failure? && @configuration.exceptions_to_retry && @attempt && @attempt < @configuration.max_attempts && cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ @configuration.exceptions_to_retry
             puts "test env number: " + ENV['TEST_ENV_NUMBER']
+            if(cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s =~ /.*ReadTimeout.*/)
+              @attempt = @attempt - 1
+            end
               if(@attempt == (@configuration.max_attempts - 1))
                 puts "Enabling screenshots!"
                 ENV['SCREENS'] = "true"
