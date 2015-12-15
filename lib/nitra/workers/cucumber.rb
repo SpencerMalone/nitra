@@ -75,7 +75,7 @@ module Nitra::Workers
               end  
               #ENV['TEST_ENV_NUMBER'] = ((ENV['TEST_ENV_NUMBER'].to_i % configuration.process_count) + 1).to_s
             puts "new test env number: " + ENV['TEST_ENV_NUMBER']
-          raise RetryException
+          raise RetryException, cuke_runtime.send(:summary_report).test_cases.exceptions[0].to_s
         end
 
         if m = io.string.match(/(\d+) scenarios?.+$/)
