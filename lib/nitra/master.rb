@@ -71,7 +71,7 @@ protected
 
   def runners
     @runners ||= []
-  end
+  endt
 
   def progress
     @progress ||= Nitra::Progress.new
@@ -148,7 +148,7 @@ protected
 
       when "retry"
         burndown.retry(data["on"], data["framework"], data["filename"])
-        say "#{data["on"]} Re-running #{data["filename"]}"
+        say "#{data["on"]} Re-running #{data["filename"]} due to #{data["text"]}"
 
       when "starting"
         debug "#{data["on"]} Starting framework #{data["framework"]}"
