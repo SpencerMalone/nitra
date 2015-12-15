@@ -219,7 +219,7 @@ module Nitra
           "framework" => self.class.framework_name,
           "filename"  => filename,
           "on"        => on,
-          "text"      => io.string,
+          "text"      => "test " + e.message,
         })
         retry
 
