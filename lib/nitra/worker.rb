@@ -211,7 +211,7 @@ module Nitra
         })
 
       rescue RetryException, Exception => e
-      io << e.message
+      io << "test " + e.message
         @attempt += 1
         clean_up
         channel.write({
