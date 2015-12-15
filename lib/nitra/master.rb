@@ -71,7 +71,7 @@ protected
 
   def runners
     @runners ||= []
-  endt
+  end
 
   def progress
     @progress ||= Nitra::Progress.new
