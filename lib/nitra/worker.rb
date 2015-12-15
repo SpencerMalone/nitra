@@ -210,7 +210,7 @@ module Nitra
           "text"      => result["failure"] ? io.string : "",
         })
 
-      rescue RetryException
+      rescue RetryException, Exception => e
         @attempt += 1
         clean_up
         channel.write({
@@ -218,6 +218,7 @@ module Nitra
           "framework" => self.class.framework_name,
           "filename"  => filename,
           "on"        => on,
+          "text"      => e.message
         })
         retry
 
