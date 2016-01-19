@@ -21,8 +21,9 @@ module Nitra
     end
 
     def finish
+      puts 'Start of filtered output!'
       puts progress.filtered_output
-
+      puts 'End of filtered output'
       puts "\n#{overview}"
       puts "#{$aborted ? "Aborted after" : "Finished in"} #{"%0.1f" % (Time.now-start_time)} seconds"
       $stdout.flush
